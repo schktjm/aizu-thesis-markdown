@@ -22,91 +22,26 @@ $for(classoption)$
 $endfor$
 ]{$documentclass$}
 
-$if(beamer)$
-\newif\ifbibliography
-$endif$
-
+\usepackage{pifont}
+\usepackage{graphicx}
+\usepackage{cite}
 \usepackage[dvipdfmx]{hyperref}
-\usepackage{pxjahyper}
-\usepackage{longtable,booktabs}
-\usepackage{listings}
-\usepackage{xcolor}
+
+% ハイフネーション禁止
+\hyphenpenalty=10000\relax
+\exhyphenpenalty=10000\relax
+\sloppy
 
 
-\usepackage[dvipdfmx]{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-
-
-\lstset{
-    basicstyle=\ttfamily,
-    keywordstyle=\color[RGB]{33,74,135}\bfseries,
-    stringstyle=\color[RGB]{79,153,5},
-    commentstyle=\color[RGB]{143,89,2}\itshape,
-    numberstyle=\footnotesize,
-    numbers=left,
-    stepnumber=1,
-    numbersep=15pt,
-    backgroundcolor=\color[RGB]{251,251,251},
-    frame=single,
-    frameround=ffff,
-    framesep=5pt,
-    rulecolor=\color[RGB]{148,150,152}, 
-    breaklines=true,
-    breakautoindent=true,
-    breakatwhitespace=true,
-    breakindent=25pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2,
-    captionpos=b,
-    linewidth=\textwidth,
-}
 % ここまで
 
 
 $for(header-includes)$
 $header-includes$
 $endfor$
-$if(lang)$
-\ifxetex
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
-$for(polyglossia-otherlangs)$
-  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
-$endfor$
-\else
-  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
-$if(babel-newcommands)$
-  $babel-newcommands$
-$endif$
-\fi
-$endif$
-$if(dir)$
-\ifxetex
-  % Load bidi as late as possible as it modifies e.g. graphicx
-  \usepackage{bidi}
-\fi
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \TeXXeTstate=1
-  \newcommand{\RL}[1]{\beginR #1\endR}
-  \newcommand{\LR}[1]{\beginL #1\endL}
-  \newenvironment{RTL}{\beginR}{\endR}
-  \newenvironment{LTR}{\beginL}{\endL}
-\fi
-$endif$
-$if(natbib)$
-\usepackage[$natbiboptions$]{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
-$endif$
+
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$ieicetr$endif$}
+
 $if(biblatex)$
 \usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
 $for(bibliography)$
@@ -117,126 +52,58 @@ $endif$
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
-$if(subtitle)$
-$if(beamer)$
-$else$
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-$endif$
-\subtitle{$subtitle$}
-$endif$
+
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
-\date{$date$}
-$if(beamer)$
-$if(institute)$
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+
+$if(studentid)$
+\studentid{$studentid$}
 $endif$
-$if(titlegraphic)$
-\titlegraphic{\includegraphics{$titlegraphic$}}
-$endif$
-$if(logo)$
-\logo{\includegraphics{$logo$}}
-$endif$
+
+$if(supervisor)$
+\supervisor{$supervisor$}
 $endif$
 
 \begin{document}
-\maketitle
-$if(has-frontmatter)$
-\frontmatter
-$endif$
-$if(title)$
-$if(beamer)$
-\frame{\titlepage}
-$else$
-$endif$
-$if(abstract)$
-\begin{abstract}
-  $abstract$
-\end{abstract}
-$endif$
-$endif$
-
-$for(include-before)$
-$include-before$
-
-$endfor$
-$if(toc)$
-$if(toc-title)$
-\renewcommand*\contentsname{$toc-title$}
-$endif$
-$if(beamer)$
-\begin{frame}
-  $if(toc-title)$
-  \frametitle{$toc-title$}
-  $endif$
-  \tableofcontents[hideallsubsections]
-\end{frame}
-$else$
-{
-    $if(colorlinks)$
-    \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
+    \maketitle
+    $if(abstract)$
+    \begin{abstract}
+        $abstract$
+    \end{abstract}
     $endif$
-    \setcounter{tocdepth}{$toc-depth$}
-    \tableofcontents
-  }
-$endif$
-$endif$
-$if(lot)$
-\listoftables
-$endif$
-$if(lof)$
-\listoffigures
-$endif$
-$if(linestretch)$
-\setstretch{$linestretch$}
-$endif$
-$if(has-frontmatter)$
-\mainmatter
-$endif$
-$body$
 
-$if(has-frontmatter)$
-\backmatter
-$endif$
-$if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(has-chapters)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-$if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-  $endif$
-  \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-  $if(beamer)$
-\end{frame}
-$endif$
+    $body$
 
-$endif$
-$endif$
-$if(biblatex)$
-$if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-  \printbibliography[heading=none]
-\end{frame}
-$else$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
-$endif$
+   % $if(natbib)$
+   % $if(bibliography)$
+   %   $if(biblio-title)$
+   %     $if(has-chapters)$
+   %     \renewcommand\bibname{$biblio-title$}
+   %     $else$
+   %     \renewcommand\refname{$biblio-title$}
+   %     $endif$
+   %   $endif$
+   %   $if(beamer)$
+   %   \begin{frame}[allowframebreaks]{$biblio-title$}
+   %     \bibliographytrue
+   %     $endif$
+   %     \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+   %     $if(beamer)$
+   %   \end{frame}
+   %   $endif$
+   % $endif$
+   % $endif$
 
-$endif$
-$for(include-after)$
-$include-after$
+   % $if(biblatex)$
+   % $if(beamer)$
+   % \begin{frame}[allowframebreaks]{$biblio-title$}
+   %   \bibliographytrue
+   %   \printbibliography[heading=none]
+   % \end{frame}
+   % $else$
+   % \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+   % $endif$
+   % $endif$
 
-$endfor$
 \end{document}
