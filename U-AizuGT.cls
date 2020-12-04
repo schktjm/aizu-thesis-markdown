@@ -69,14 +69,14 @@
 %% magic words
 %%
 \@ifundefined{kanjiskip}{}{%
-    \DeclareFontShape{JY1}{mc}{m}{sl}{<->ssub*mc/m/n}{}
-    \DeclareFontShape{JY1}{mc}{m}{it}{<->ssub*mc/m/n}{}
-    \DeclareFontShape{JT1}{mc}{m}{sl}{<->ssub*mc/m/n}{}
-    \DeclareFontShape{JT1}{mc}{m}{it}{<->ssub*mc/m/n}{}
-    \DeclareFontShape{JY1}{gt}{m}{sl}{<->ssub*gt/m/n}{}
-    \DeclareFontShape{JY1}{gt}{m}{it}{<->ssub*gt/m/n}{} 
-    \DeclareFontShape{JT1}{gt}{m}{sl}{<->ssub*gt/m/n}{}
-    \DeclareFontShape{JT1}{gt}{m}{it}{<->ssub*gt/m/n}{}
+    \DeclareFontShape{JY2}{mc}{m}{sl}{<->ssub*mc/m/n}{}
+    \DeclareFontShape{JY2}{mc}{m}{it}{<->ssub*mc/m/n}{}
+    \DeclareFontShape{JT2}{mc}{m}{sl}{<->ssub*mc/m/n}{}
+    \DeclareFontShape{JT2}{mc}{m}{it}{<->ssub*mc/m/n}{}
+    \DeclareFontShape{JY2}{gt}{m}{sl}{<->ssub*gt/m/n}{}
+    \DeclareFontShape{JY2}{gt}{m}{it}{<->ssub*gt/m/n}{} 
+    \DeclareFontShape{JT2}{gt}{m}{sl}{<->ssub*gt/m/n}{}
+    \DeclareFontShape{JT2}{gt}{m}{it}{<->ssub*gt/m/n}{}
 }
 
 %%

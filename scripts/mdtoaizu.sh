@@ -15,11 +15,9 @@ trap 'on_exit $?' EXIT
 
 pandoc -s -N ${filename_without_ext}.md -o ${filename_without_ext}.tex \
 --pdf-engine=latexmk \
+--pdf-engine-opt="-pdfdvi" \
+-F pandoc-crossref \
+-F pandoc-citeproc \
+-M "crossrefYaml=./crossref_config.yaml" \
 --listings --template=template.tex &&
 latexmk ${filename_without_ext}.tex
-
-# -M "crossrefYaml=/config/crossref_config.yaml" \
-# -F pandoc-crossref \
-# --pdf-engine-opt="-pdfdvi" \
-# -F pandoc-citeproc \
-# --top-level-division=chapter --toc  
