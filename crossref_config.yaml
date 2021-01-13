@@ -1,7 +1,7 @@
 figureTitle: 'Figure'
 tableTitle: 'Table'
 listingTitle: 'Code'
-figPrefix: 'Figre'
+figPrefix: 'Figure'
 eqnPrefix: 'Formula'
 tblPrefix: 'Table'
 secPrefix: 'Section'
