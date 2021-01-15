@@ -11,7 +11,7 @@
 1. 必要なDockerイメージをダウンロードする
 
 ```shell script
-docker pull plass/mdtopdf:include-font
+docker pull plass/mdtopdf:include-fonts
 ```
 2. 必要な文章フォーマットをダウンロードする
 
